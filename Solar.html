@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <title>Babylon - Getting Started</title>
+    <!--- Link to the last version of BabylonJS --->
+    <script src="https://cdn.babylonjs.com/babylon.max.js"></script>
+    <style>
+        html, body {
+            overflow: hidden;
+            width   : 100%;
+            height  : 100%;
+            margin  : 0;
+            padding : 0;
+        }
+
+        #renderCanvas {
+            width   : 100%;
+            height  : 100%;
+            touch-action: none;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="renderCanvas"></canvas>
+    <script>
+        window.addEventListener('DOMContentLoaded', function(){
+            // get the canvas DOM element
+            var canvas = document.getElementById('renderCanvas');
+
+            // load the 3D engine
+            var engine = new BABYLON.Engine(canvas, true);
+
+            // createScene function that creates and return the scene
+            var createScene = function(){
+                // create a basic BJS Scene object
+                var scene = new BABYLON.Scene(engine);
+
+                // create a FreeCamera, and set its position to (x:0, y:5, z:-10)
+                var camera = new BABYLON.ArcRotateCamera('camera1', new BABYLON.Vector3(0, 0,10), scene);
+				
+				camera.setPosition(new BABYLON.Vector3(95,10,20));
+
+                // target the camera to scene origin
+                camera.setTarget(BABYLON.Vector3.Zero());
+
+                // attach the camera to the canvas
+                camera.attachControl(canvas, false);
+
+                // create a basic light, aiming 0,1,0 - meaning, to the sky
+                var light = new BABYLON.PointLight('light1', new BABYLON.Vector3(0,1,0), scene);
+
+				//scene.clearColor = BABYLON.Color3.Black;
+				
+                // create a built-in "sphere" shape; its constructor takes 6 params: name, segment, diameter, scene, updatable, sideOrientation 
+				
+//========== Earth Code =====================//
+				var earth = new BABYLON.StandardMaterial("earth", scene);
+				earth.diffuseTexture = new BABYLON.Texture("Earth.jpg",scene);
+
+                var Earth  = BABYLON.Mesh.CreateSphere('Earth ', 16, 2, scene); //210193
+                Earth.material = earth;
+				Earth .position.x = 8.45;
+				
+					
+//=============Earth Code Ends ================//
+				
+// ===============Mercury Code ==========//
+				
+				var mercury = new BABYLON.StandardMaterial("mercury", scene);
+				mercury.diffuseTexture = new BABYLON.Texture("mercury.jpg", scene);
+				
+				var Mercury = BABYLON.Mesh.CreateSphere("Mercury", 20, 0.66, scene);   // 1/3 of Earth 
+				Mercury.material = mercury;
+				Mercury.position.x = 2.85;
+				
+				
+//===============Mercury Code Ends========//
+				
+//================Venus Code =============//
+				var venus = new BABYLON.StandardMaterial("venus", scene);
+				venus.diffuseTexture = new BABYLON.Texture("venus.jpg", scene);
+				
+				var Venus = BABYLON.Mesh.CreateSphere("Venus", 20, 1.8, scene);     // 0.9 into earth
+				Venus.material = venus;
+				Venus.position.x = 5.4;
+				
+	
+//=====================Venus Code Ends=================//
+				
+//=========Mars Code=====================//
+				
+				var mars = new BABYLON.StandardMaterial("mars", scene);
+				mars.diffuseTexture = new BABYLON.Texture("mars.png", scene);
+				
+				var Mars = BABYLON.Mesh.CreateSphere("Mars", 20, 1.2, scene);		//   1/1.9
+				Mars.material = mars;
+				Mars.position.x = 11.80;
+				
+				
+//=========Mars Code ends=====================//
+				
+								
+//=========Jupiter Code=====================//
+				var jupitor = new BABYLON.StandardMaterial("jupitor", scene);
+				jupitor.diffuseTexture = new BABYLON.Texture("jupitor.jpg", scene);
+				
+				var Jupiter = BABYLON.Mesh.CreateSphere("Jupiter", 20, 15, scene);    // 11 into Earth
+				Jupiter.material = jupitor;
+				Jupiter.position.x = 30.9;
+				
+//=============Jupiter Code Ends ============//
+				
+				
+//=========Saturn Code=====================//
+				
+				
+				var saturn = new BABYLON.StandardMaterial("saturn", scene);
+				saturn.diffuseTexture = new BABYLON.Texture("saturn.jpg", scene);
+				
+				var Saturn = BABYLON.Mesh.CreateSphere("Saturn", 20, 13.5, scene);   //9.5 into earth
+				Saturn.material = saturn;
+				Saturn.position.x = 50.5;
+				
+//============Saturn Code Ends================//
+				
+								
+//=============Uranus Code=========================//
+				
+				var uranus = new BABYLON.StandardMaterial("uranus", scene);
+				uranus.diffuseTexture = new BABYLON.Texture("uranus.jpg", scene);
+				
+				var Uranus = BABYLON.Mesh.CreateSphere("Uranus", 20, 4, scene);   // 4 into earth
+				Uranus.material = uranus;
+				Uranus.position.x = 65;
+				
+				
+//==============Uranus Code Ends ===============//
+				
+//===============Neptune Code==================//
+				
+				var neptune = new BABYLON.StandardMaterial("neptune", scene);
+				neptune.diffuseTexture = new BABYLON.Texture("neptune.jpg", scene);
+				
+				var Neptune = BABYLON.Mesh.CreateSphere("Neptune", 20, 3.9, scene); // 3.9 into Earth
+				Neptune.material = neptune;
+				Neptune.position.x = 73;
+				
+//===============Neptune Code Ends==================//
+				
+//===============Pluto Code ========================//
+				
+				var pluto = new BABYLON.StandardMaterial("pluto", scene);
+				pluto.diffuseTexture = new BABYLON.Texture("pluto.jpg", scene);
+				
+				var Pluto = BABYLON.Mesh.CreateSphere("Pluto", 20, 0.334, scene);    // 1/6 of Earth
+				Pluto.material = pluto;
+				Pluto.position.x = 80;
+				
+				 var h2 = new BABYLON.HighlightLayer("plu",scene);  //pluto highliter
+				   h2.addMesh(Pluto ,BABYLON.Color3.Blue());
+//===============Pluto Code Ends==================//
+
+	var godrays = new BABYLON.VolumetricLightScatteringPostProcess('godrays', 1.0, camera, null, 100, BABYLON.Texture.BILINEAR_SAMPLINGMODE, engine, false);	
+	
+	godrays.mesh.material.diffuseTexture = new BABYLON.Texture("sun.png", scene, true, false, BABYLON.Texture.BILINEAR_SAMPLINGMODE); //C:\Users\HP LAPTOP\Desktop\
+	godrays.mesh.material.diffuseTexture.hasAlpha = true;
+	godrays.mesh.position = new BABYLON.Vector3(-25, 0, 0);
+	godrays.mesh.scaling = new BABYLON.Vector3(50, 50, 50);
+
+	light.position = godrays.mesh.position;			
+
+
+//===============Spin Code ===========================//
+var frameRate = 10;
+				
+               var h1 = new BABYLON.HighlightLayer("hl1",scene);
+				   h1.addMesh(Earth ,BABYLON.Color3.White());
+				   
+				//Rotation Animation 
+				var yRot = new BABYLON.Animation("yRot", "rotation.y", frameRate, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE);
+
+
+
+						var keyFramesR = []; 
+
+							keyFramesR.push({
+								frame: 0,
+								value: 0
+							});
+
+							keyFramesR.push({
+								frame: 2.5 * frameRate,
+								value: 2 * Math.PI
+							});
+
+							keyFramesR.push({
+								frame: 5 * frameRate,
+								value: 4 * Math.PI
+							});
+
+
+						yRot.setKeys(keyFramesR);
+
+				var nextAnimation = function() {
+					scene.beginDirectAnimation(Mercury , [yRot], 0, 4 * frameRate, true);
+					scene.beginDirectAnimation(Venus , [yRot], 0, 4 * frameRate, true);
+					scene.beginDirectAnimation(Earth , [yRot], 0, 4 * frameRate, true);
+					scene.beginDirectAnimation(Mars , [yRot], 0, 4 * frameRate, true);
+					scene.beginDirectAnimation(Jupiter , [yRot], 0, 4 * frameRate, true);
+					scene.beginDirectAnimation(Saturn , [yRot], 0, 4 * frameRate, true);
+					scene.beginDirectAnimation(Uranus , [yRot], 0, 4 * frameRate, true);
+					scene.beginDirectAnimation(Neptune , [yRot], 0, 4 * frameRate, true);
+					scene.beginDirectAnimation(Pluto , [yRot], 0, 4 * frameRate, true);
+
+				}
+
+					scene.beginDirectAnimation(Mercury , [yRot],  0, 4 * frameRate, false, 1, nextAnimation);
+					scene.beginDirectAnimation(Venus , [yRot],  0, 4 * frameRate, false, 1, nextAnimation);
+					scene.beginDirectAnimation(Earth , [yRot],  0, 4 * frameRate, false, 1, nextAnimation);
+					scene.beginDirectAnimation(Mars , [yRot],  0, 4 * frameRate, false, 1, nextAnimation);
+					scene.beginDirectAnimation(Jupiter , [yRot],  0, 4 * frameRate, false, 1, nextAnimation);
+					scene.beginDirectAnimation(Saturn , [yRot],  0, 4 * frameRate, false, 1, nextAnimation);
+					scene.beginDirectAnimation(Uranus , [yRot],  0, 4 * frameRate, false, 1, nextAnimation);
+					scene.beginDirectAnimation(Neptune , [yRot],  0, 4 * frameRate, false, 1, nextAnimation);
+					scene.beginDirectAnimation(Pluto , [yRot],  0, 4 * frameRate, false, 1, nextAnimation);
+
+
+
+//==============Spin Code Ends ======================//
+
+
+
+
+
+	
+/*
+	var textureResolution = 512;
+	var textureGround = new BABYLON.DynamicTexture("dynamic texture", {width:512, height:256}, scene);   
+	var textureContext = textureGround.getContext();
+	
+	var materialGround = new BABYLON.StandardMaterial("Mat", scene);    				
+	materialGround.diffuseTexture = textureGround;
+	Earth .material = materialGround;
+	
+    //Add text to dynamic texture
+    var font = "bold 44px monospace";
+    textureGround.drawText("Vasai", 75, 135, font, "green", "white", false, true);
+	*/			
+                // return the created scene
+                return scene;
+            }
+
+            // call the createScene function
+            var scene = createScene();
+
+            // run the render loop
+            engine.runRenderLoop(function(){
+                scene.render();
+            });
+
+            // the canvas/window resize event handler
+            window.addEventListener('resize', function(){
+                engine.resize();
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+//http://bit.ly/VictoriaHealth-TP6-IM
+//http://bit.ly/VictoriaHealth-TP6-SM
