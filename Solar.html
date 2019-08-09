@@ -72,8 +72,9 @@
 				
 				var Mercury = BABYLON.Mesh.CreateSphere("Mercury", 20, 0.66, scene);   // 1/3 of Earth 
 				Mercury.material = mercury;
-				Mercury.position.x = 2.85;
+				Mercury.position.x = -25;
 				
+				Mercury.setPivotMatrix(BABYLON.Matrix.Translation(-27.85,0,0), false);
 				
 //===============Mercury Code Ends========//
 				
@@ -172,7 +173,7 @@
 
 
 //===============Spin Code ===========================//
-var frameRate = 10;
+/*var frameRate = 10;
 				
                var h1 = new BABYLON.HighlightLayer("hl1",scene);
 				   h1.addMesh(Earth ,BABYLON.Color3.White());
@@ -224,16 +225,20 @@ var frameRate = 10;
 					scene.beginDirectAnimation(Uranus , [yRot],  0, 4 * frameRate, false, 1, nextAnimation);
 					scene.beginDirectAnimation(Neptune , [yRot],  0, 4 * frameRate, false, 1, nextAnimation);
 					scene.beginDirectAnimation(Pluto , [yRot],  0, 4 * frameRate, false, 1, nextAnimation);
-
-
+*/
+scene.registerBeforeRender(function(){
+	Mercury.rotation.y += 0.01;
+	Venus.rotation.y += 0.01;
+	Earth.rotation.y += 0.01;
+	Mars.rotation.y += 0.01;
+	Jupiter.rotation.y += 0.01;
+	Saturn.rotation.y += 0.01;
+	Uranus.rotation.y += 0.01;
+	Neptune.rotation.y += 0.01;
+	Pluto.rotation.y += 0.01;
+})
 
 //==============Spin Code Ends ======================//
-
-
-
-
-
-	
 /*
 	var textureResolution = 512;
 	var textureGround = new BABYLON.DynamicTexture("dynamic texture", {width:512, height:256}, scene);   
