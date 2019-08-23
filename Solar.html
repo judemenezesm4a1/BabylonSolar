@@ -60,8 +60,9 @@
 
                 var Earth  = BABYLON.Mesh.CreateSphere('Earth ', 16, 2, scene); //210193
                 Earth.material = earth;
-				Earth .position.x = 8.45;
+				Earth.position.x = -25; //8.45;
 				
+				Earth.setPivotMatrix(BABYLON.Matrix.Translation(-33.45,0,0), false);
 					
 //=============Earth Code Ends ================//
 				
@@ -74,7 +75,7 @@
 				Mercury.material = mercury;
 				Mercury.position.x = -25;
 				
-				Mercury.setPivotMatrix(BABYLON.Matrix.Translation(-27.85,0,0), false);
+				Mercury.setPivotMatrix(BABYLON.Matrix.Translation(-27.85,0,0), false); //revolution 
 				
 //===============Mercury Code Ends========//
 				
@@ -84,7 +85,10 @@
 				
 				var Venus = BABYLON.Mesh.CreateSphere("Venus", 20, 1.8, scene);     // 0.9 into earth
 				Venus.material = venus;
-				Venus.position.x = 5.4;
+				Venus.position.x = -25; 
+				//5.4;
+
+				Venus.setPivotMatrix(BABYLON.Matrix.Translation(-30.4,0,0), false);
 				
 	
 //=====================Venus Code Ends=================//
@@ -96,9 +100,9 @@
 				
 				var Mars = BABYLON.Mesh.CreateSphere("Mars", 20, 1.2, scene);		//   1/1.9
 				Mars.material = mars;
-				Mars.position.x = 11.80;
+				Mars.position.x = -25; //11.80;
 				
-				
+				Mars.setPivotMatrix(BABYLON.Matrix.Translation(-36.80,0,0), false);
 //=========Mars Code ends=====================//
 				
 								
@@ -108,8 +112,9 @@
 				
 				var Jupiter = BABYLON.Mesh.CreateSphere("Jupiter", 20, 15, scene);    // 11 into Earth
 				Jupiter.material = jupitor;
-				Jupiter.position.x = 30.9;
+				Jupiter.position.x = -25 //30.9;
 				
+				Jupiter.setPivotMatrix(BABYLON.Matrix.Translation(-55.9,0,0), false);
 //=============Jupiter Code Ends ============//
 				
 				
@@ -121,8 +126,10 @@
 				
 				var Saturn = BABYLON.Mesh.CreateSphere("Saturn", 20, 13.5, scene);   //9.5 into earth
 				Saturn.material = saturn;
-				Saturn.position.x = 50.5;
+				Saturn.position.x = -25; //50.5;
 				
+				Saturn.setPivotMatrix(BABYLON.Matrix.Translation(-75.5,0,0), false);
+
 //============Saturn Code Ends================//
 				
 								
@@ -133,8 +140,9 @@
 				
 				var Uranus = BABYLON.Mesh.CreateSphere("Uranus", 20, 4, scene);   // 4 into earth
 				Uranus.material = uranus;
-				Uranus.position.x = 65;
+				Uranus.position.x = -25; //65;
 				
+				Uranus.setPivotMatrix(BABYLON.Matrix.Translation(-90.00,0,0), false);
 				
 //==============Uranus Code Ends ===============//
 				
@@ -145,7 +153,9 @@
 				
 				var Neptune = BABYLON.Mesh.CreateSphere("Neptune", 20, 3.9, scene); // 3.9 into Earth
 				Neptune.material = neptune;
-				Neptune.position.x = 73;
+				Neptune.position.x = -25 //73;
+
+				Neptune.setPivotMatrix(BABYLON.Matrix.Translation(-98.00,0,0), false);
 				
 //===============Neptune Code Ends==================//
 				
@@ -156,10 +166,12 @@
 				
 				var Pluto = BABYLON.Mesh.CreateSphere("Pluto", 20, 0.334, scene);    // 1/6 of Earth
 				Pluto.material = pluto;
-				Pluto.position.x = 80;
+				Pluto.position.x = -25 //80;
 				
 				 var h2 = new BABYLON.HighlightLayer("plu",scene);  //pluto highliter
-				   h2.addMesh(Pluto ,BABYLON.Color3.Blue());
+				   h2.addMesh(Pluto ,BABYLON.Color3.Yellow());
+				
+				Pluto.setPivotMatrix(BABYLON.Matrix.Translation(-105.00,0,0), false);
 //===============Pluto Code Ends==================//
 
 	var godrays = new BABYLON.VolumetricLightScatteringPostProcess('godrays', 1.0, camera, null, 100, BABYLON.Texture.BILINEAR_SAMPLINGMODE, engine, false);	
@@ -226,16 +238,17 @@
 					scene.beginDirectAnimation(Neptune , [yRot],  0, 4 * frameRate, false, 1, nextAnimation);
 					scene.beginDirectAnimation(Pluto , [yRot],  0, 4 * frameRate, false, 1, nextAnimation);
 */
+//Revolution Speed
 scene.registerBeforeRender(function(){
-	Mercury.rotation.y += 0.01;
-	Venus.rotation.y += 0.01;
-	Earth.rotation.y += 0.01;
-	Mars.rotation.y += 0.01;
-	Jupiter.rotation.y += 0.01;
-	Saturn.rotation.y += 0.01;
-	Uranus.rotation.y += 0.01;
-	Neptune.rotation.y += 0.01;
-	Pluto.rotation.y += 0.01;
+	Mercury.rotation.y += 0.102804; //0.88;
+	Venus.rotation.y += 0.067907; //0.0225;
+	Earth.rotation.y += 0.034736;//0.0365;
+	Mars.rotation.y += 0.012205;//0.0687;
+	Jupiter.rotation.y += 0.004918;//0.01;
+	Saturn.rotation.y += 0.000781//0.01;
+	Uranus.rotation.y += 0.000415;
+	Neptune.rotation.y += 0.000256;
+	Pluto.rotation.y += 0.0001;
 })
 
 //==============Spin Code Ends ======================//
